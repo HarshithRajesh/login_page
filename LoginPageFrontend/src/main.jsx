@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import {Login,SignUP} from './Pages'
+import {Login,SignUP,SimpleForm} from './Pages'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -12,6 +12,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App/>,
+  },
+  {
+    path: "/simple",
+    element: <SimpleForm/>,
   },
   {
     path: "Login",
