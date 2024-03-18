@@ -1,3 +1,4 @@
 import Login from "./Login/Login"
 import SignUP from "./SignUp/SignUp"
-export {Login,SignUP}
+import SimpleForm from "./SimpleForm/SimpleFrom"
+export {Login,SignUP,SimpleForm}

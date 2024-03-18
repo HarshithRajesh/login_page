@@ -9,6 +9,7 @@ const App = () => {
   </div>
   <div><Link to="/SignUp">SignUp</Link></div>
   <div><Link to="/Login">Login</Link></div>
+  <div><Link to="/simple">SimpleForm</Link></div>
   </>
 }
 
