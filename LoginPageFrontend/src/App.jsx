@@ -1,6 +1,5 @@
 import React,{useEffect} from 'react'
 import { Link } from "react-router-dom";
-
 const App = () => {
   useEffect(()=>{
     window.scroll(0,0);
