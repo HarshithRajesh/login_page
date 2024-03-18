@@ -1,18 +1,30 @@
 import styles from "./PasswordInputField.module.css"
-
-function PasswordInputField({handleValidation, handlePasswordChange, passwordValue, passwordError}){
+import React, { forwardRef, useImperativeHandle,useRef } from "react";
+const PasswordInputField= forwardRef((props, ref) => {
+    const inputRef = useRef(null);
+    useImperativeHandle(ref, () => ({
+        focusInput() {
+          inputRef.current.focus();
+        }
+      }));
     return (
         <>
     <form>
      <div className={styles.form_control}>
      <label htmlFor="Pass">Password</label>
-        <input type="password" value={passwordValue}  onChange={handlePasswordChange} onKeyUp={handleValidation} name="password" placeholder="Password" />
-        <p className="text-danger">{passwordError}</p>
+        <input type="password"
+      ref={inputRef}
+      onChange={props.handlePasswordChange}
+      value={props.passwordValue}
+      onKeyUp={props.handleValidation}
+      name="password"
+      placeholder="Password" />
+        <p className="text-danger">{props.passwordError}</p>
         </div>
     </form>
           
         </>
-    )
-}
+    );
+});
 
 export default PasswordInputField;
