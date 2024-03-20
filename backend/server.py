@@ -47,5 +47,45 @@ def register():
     else:
         return {'status':'Bad Connection'}
 
+@app.route('/Login',methods=['GET','POST'])
+def login():
+    conn =get_db_connection()
+    if request.method=='POST':
+        
+        cursor = conn.cursor()
+        data = request.get_json()
+        login_cred = data.get('login_cred')
+        password = data.get('password')
+        query = f"SELECT * FROM users WHERE email='{login_cred}' OR name='{login_cred}' OR phonenumber='{login_cred}';"
+        cursor.execute(query)
+
+        user = cursor.fetchone()
+
+        if not user:
+
+            return {"status":0,"message":"User not found,Please register"}
+        
+        elif password!=user[4]:
+
+            return {"status":0,"message":"Password is not matching","password":password,"database_pass":user[2]}
+
+        # elif not check_password_hash(userpass,password):
+
+        #     return {"status":0,"message":"Password is not matching"}
+        else:
+            # # login_user(user)
+            # # id = str(id)
+            # uid = str(user.id)
+            # additionals_claims = {
+            #     "name": user.name,
+            #     "phoneNumber" :user.phoneNumber,
+            #     "email":user.email
+                   
+            # }
+            
+            response =  {"status":1,"user":user[1]}
+            return jsonify(response)
+        return
+
 if __name__=='__main__':
     app.run(host='0.0.0.0',debug=True)
