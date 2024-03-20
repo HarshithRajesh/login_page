@@ -5,17 +5,21 @@ from flask_cors import CORS
 import os
 import psycopg2
 
+
+load_dotenv()
+database_password = os.getenv('DATABASE_PASSWORD')
+secret_key = os.getenv("SECRET_KEY")
 def get_db_connection():
     conn = psycopg2.connect(
         host='localhost',
         port=5432,
         database="medical-mitra",
         user="postgres",
-        password="babe"
+        password=database_password
     )
     return conn
 app = Flask(__name__)
-app.config['SECRET_KEY']="LOGIN"
+app.config['SECRET_KEY']=secret_key
 CORS(app)
 
 @app.route('/')
@@ -32,18 +36,12 @@ def register():
         email = data.get('email')
         phonenumber = data.get('phoneNumber')
         password = data.get('password')
-        # email = request.args.get('email')
-        # name=request.args.get('name')
-        # password=request.args.get('password')
-        # phonenumber =request.args.get('phoneNumber')
         sql = '''INSERT INTO users
                 (name,email,phonenumber,password)
                 VALUES (%s,%s,%s,%s);'''
         cursor.execute(sql,(name,email,phonenumber,password))
         conn.commit()
         return {"status":1,'conn':'Good Connection'}
-        # query = f"SELECT * FROM users WHERE email='{email}';"
-        # cursor.execute(query)
     else:
         return {'status':'Bad Connection'}
 
@@ -69,20 +67,7 @@ def login():
 
             return {"status":0,"message":"Password is not matching","password":password,"database_pass":user[2]}
 
-        # elif not check_password_hash(userpass,password):
-
-        #     return {"status":0,"message":"Password is not matching"}
         else:
-            # # login_user(user)
-            # # id = str(id)
-            # uid = str(user.id)
-            # additionals_claims = {
-            #     "name": user.name,
-            #     "phoneNumber" :user.phoneNumber,
-            #     "email":user.email
-                   
-            # }
-            
             response =  {"status":1,"user":user[1]}
             return jsonify(response)
         return
