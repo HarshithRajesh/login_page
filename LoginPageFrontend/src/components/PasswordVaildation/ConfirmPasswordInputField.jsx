@@ -9,7 +9,7 @@ const ConfirmPasswordInputField = forwardRef((props, ref) => {
       }
     }));
     return (
-        <><form>
+        <>
      <div className={styles.form_control}>
         <label htmlFor="ConirmPass">Confirm Password</label>
         <input
@@ -23,7 +23,7 @@ const ConfirmPasswordInputField = forwardRef((props, ref) => {
     />
         <p className="text-danger">{props.confirmPasswordError}</p>
     </div>
-    </form>
+    
         </> 
     );
     });

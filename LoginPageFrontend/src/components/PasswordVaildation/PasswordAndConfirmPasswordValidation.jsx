@@ -12,11 +12,13 @@ const PasswordAndConfirmPasswordValidation = forwardRef((props, ref) => {
 
 
     const handlePasswordChange = (evnt) => {
-
+        console.log(passwordInput.password);
         const passwordInputValue = evnt.target.value.trim();
         const passwordInputFieldName = evnt.target.name;
         const NewPasswordInput = { ...passwordInput, [passwordInputFieldName]: passwordInputValue }
         setPasswordInput(NewPasswordInput);
+        props.onPasswordChange(evnt.target.value.trim());
+        console.log(NewPasswordInput);
 
     }
     const handleValidation = (evnt) => {

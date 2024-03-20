@@ -5,15 +5,18 @@ const PasswordInputField= forwardRef((props, ref) => {
     useImperativeHandle(ref, () => ({
         focusInput() {
           inputRef.current.focus();
+          console.log(inputRef.current.value);
         }
+        
       }));
     return (
         <>
-    <form>
+    
      <div className={styles.form_control}>
      <label htmlFor="Pass">Password</label>
         <input type="password"
       ref={inputRef}
+
       onChange={props.handlePasswordChange}
       value={props.passwordValue}
       onKeyUp={props.handleValidation}
@@ -21,8 +24,6 @@ const PasswordInputField= forwardRef((props, ref) => {
       placeholder="Password" />
         <p className="text-danger">{props.passwordError}</p>
         </div>
-    </form>
-          
         </>
     );
 });
