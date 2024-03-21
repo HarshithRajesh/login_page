@@ -49,7 +49,7 @@ def register():
                     VALUES (%s,%s,%s,%s);'''
             cursor.execute(sql,(name,email,phonenumber,password))
             conn.commit()
-            return {"status":1,'conn':'Good Connection'}
+            return {"status":1,'message':'User Registerd'}
     
 
 @app.route('/Login',methods=['GET','POST'])
@@ -72,7 +72,7 @@ def login():
         
         elif password!=user[4]:
 
-            return {"status":0,"message":"Password is not matching","password":password,"database_pass":user[2]}
+            return {"status":0,"message":"Wrong password"}
 
         else:
             response =  {"status":1,"user":user[1]}
