@@ -86,7 +86,10 @@ def admin():
         query = f"SELECT * FROM users ;"
         cursor.execute(query)
         user = cursor.fetchall()
-        return{"users":user}
+        query_count = f"SELECT COUNT(*) FROM users"
+        cursor.execute(query_count)
+        count = cursor.fetchall()
+        return{"users":user,"count":count[0]}
 
 
 
