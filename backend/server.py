@@ -78,6 +78,17 @@ def login():
             response =  {"status":1,"user":user[1]}
             return jsonify(response)
         return
+@app.route("/Admin",methods=['GET','POST'])
+def admin():
+    conn =get_db_connection()
+    if request.method=='POST':
+        cursor = conn.cursor()
+        query = f"SELECT * FROM users ;"
+        cursor.execute(query)
+        user = cursor.fetchall()
+        return{"users":user}
+
+
 
 if __name__=='__main__':
     app.run(host='0.0.0.0',debug=True)
