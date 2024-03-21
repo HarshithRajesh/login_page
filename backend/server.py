@@ -83,7 +83,7 @@ def admin():
     conn =get_db_connection()
     if request.method=='POST':
         cursor = conn.cursor()
-        query = f"SELECT * FROM users ;"
+        query = f"SELECT name,email,phonenumber FROM users ;"
         cursor.execute(query)
         user = cursor.fetchall()
         query_count = f"SELECT COUNT(*) FROM users"
