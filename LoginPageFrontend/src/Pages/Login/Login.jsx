@@ -18,7 +18,7 @@ const Login = () => {
   const passwordRef = useRef();
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://192.168.97.188:5000/Form/', {
+    fetch('http://192.168.199.115:5000/Login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -37,7 +37,9 @@ const Login = () => {
       .then(data => {
         // Handle the response from the backend
         localStorage.setItem('status', data.status);
+        localStorage.setItem('user', data.user);
         console.log(data.status);
+        console.log(data.user);
         console.log('Login_cred:', login_cred, 'email:', 'password:', password);
       })
       .catch(error => {
@@ -48,7 +50,7 @@ const Login = () => {
       if (Number(localStorage.getItem('status')) === 1) {
         toast.success('Login Success', {
           position: "top-center",
-          autoClose: 4000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -57,11 +59,12 @@ const Login = () => {
           theme: "light",
           transition: Bounce,
         });
+        
       }
       else {
         toast.error('Failed to Login', {
           position: "top-center",
-          autoClose: 4000,
+          autoClose:1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,

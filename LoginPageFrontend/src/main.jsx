@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import {Login,SignUP,SimpleForm} from './Pages'
+import {Login,SignUP,SimpleForm, WebinarAdmin} from './Pages'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -18,12 +18,16 @@ const router = createBrowserRouter([
     element: <SimpleForm/>,
   },
   {
-    path: "Login",
+    path: "/Login",
     element: <Login/>,
   },
   {
-    path: "SignUp",
+    path: "/SignUp",
     element: <SignUP/>,
+  },
+  {
+    path: "/WebinarAdmin",
+    element: <WebinarAdmin/>,
   },
 
 ]);

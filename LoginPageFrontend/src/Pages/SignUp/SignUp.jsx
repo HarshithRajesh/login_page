@@ -28,7 +28,7 @@ function SignUp() {
   const passwordRef = useRef();
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://192.168.97.188:5000/Form/', {
+    fetch('http://192.168.199.115:5000//Form/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -56,17 +56,33 @@ function SignUp() {
         console.error(error);
         
       });
-      toast.success('Registered Successfully', {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      if (Number(localStorage.getItem('password')) === 1) {
+        toast.success('Registered Successfully', {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+        
+      }
+      else {
+        toast.error('Check Password again', {
+          position: "top-center",
+          autoClose:1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        })
+      }
       
   };
  
