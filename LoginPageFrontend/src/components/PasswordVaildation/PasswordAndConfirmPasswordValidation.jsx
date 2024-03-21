@@ -65,8 +65,10 @@ const PasswordAndConfirmPasswordValidation = forwardRef((props, ref) => {
 
             if (passwordInput.confirmPassword !== passwordInput.password) {
                 setConfirmPasswordError("Confirm password is not matched");
+                localStorage.setItem('password',0);
             } else {
                 setConfirmPasswordError("");
+                localStorage.setItem('password',1);
             }
 
         }
