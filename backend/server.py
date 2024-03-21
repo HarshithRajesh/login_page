@@ -27,7 +27,7 @@ CORS(app)
 def hello():
     return {'status':1}
    
-@app.route('/Form/',methods=['GET','POST'])
+@app.route('/Register/',methods=['GET','POST'])
 def register():
     conn = get_db_connection()
     if request.method =='POST':
@@ -37,14 +37,20 @@ def register():
         email = data.get('email')
         phonenumber = data.get('phoneNumber')
         password = data.get('password')
-        sql = '''INSERT INTO users
-                (name,email,phonenumber,password)
-                VALUES (%s,%s,%s,%s);'''
-        cursor.execute(sql,(name,email,phonenumber,password))
-        conn.commit()
-        return {"status":1,'conn':'Good Connection'}
-    else:
-        return {'status':'Bad Connection'}
+        query = f"SELECT * FROM users WHERE email='{email}' OR phonenumber='{phonenumber}';"
+        cursor.execute(query)
+
+        user = cursor.fetchone()
+        if user:
+            return{"status":0,"message":"User already exists"}
+        else:
+            sql = '''INSERT INTO users
+                    (name,email,phonenumber,password)
+                    VALUES (%s,%s,%s,%s);'''
+            cursor.execute(sql,(name,email,phonenumber,password))
+            conn.commit()
+            return {"status":1,'conn':'Good Connection'}
+    
 
 @app.route('/Login',methods=['GET','POST'])
 def login():
