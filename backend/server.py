@@ -81,7 +81,7 @@ def login():
 @app.route("/Admin",methods=['GET','POST'])
 def admin():
     conn =get_db_connection()
-    if request.method=='POST':
+    if request.method=='GET':
         cursor = conn.cursor()
         query = f"SELECT id,name,email,phonenumber FROM users ;"
         cursor.execute(query)
