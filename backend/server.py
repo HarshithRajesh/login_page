@@ -5,7 +5,7 @@ from flask_cors import CORS
 import os
 import psycopg2
 from dotenv import load_dotenv
-
+import json
 
 load_dotenv()
 database_password = os.getenv('DATABASE_PASSWORD')
@@ -85,11 +85,14 @@ def admin():
         cursor = conn.cursor()
         query = f"SELECT id,name,email,phonenumber FROM users ;"
         cursor.execute(query)
-        user = cursor.fetchall()
+        users = cursor.fetchall()
         query_count = f"SELECT COUNT(*) FROM users"
         cursor.execute(query_count)
         count = cursor.fetchall()
-        return{"users":user,"count":count[0]}
+        columns = ['id', 'name', 'email', 'phonenumber']
+        users_json = [dict(zip(columns, user)) for user in users]
+        # return json.dumps(users_json)
+        return {"count":count,"users":users_json}
 
 
 
