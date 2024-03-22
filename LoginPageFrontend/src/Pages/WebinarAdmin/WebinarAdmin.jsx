@@ -29,7 +29,7 @@ const timeRef = useRef('');
   useEffect(() => {
     const getUserdata = async () => {
       try {
-        const response = await fetch('http://192.168.97.188:5000/Admin', {
+        const response = await fetch('http://0.0.0.0:5000/Admin', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ const timeRef = useRef('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://192.168.97.188:5000/Webinar', {
+    fetch('http://0.0.0.0:5000/Webinar/Admin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

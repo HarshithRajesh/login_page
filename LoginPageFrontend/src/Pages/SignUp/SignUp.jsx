@@ -28,7 +28,7 @@ function SignUp() {
   const passwordRef = useRef();
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://192.168.199.115:5000/Form/', {
+    fetch('http://127.0.0.1:5000/Form/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -101,15 +101,20 @@ def webniar():
     if request.method=='POST':
         cursor = conn.cursor()
         data = request.get_json()
-        title = data.get('title')
+        title = data.get('Title')
         description = data.get('description')
-        link = data.get('link')
+        link = data.get('LinkURL')
         date = data.get('date')
         time = data.get('time')
-        sql = '''INSERT INTO webinars
-                (title,description,link,date,time)
-                VALUES (%s,%s,%s,%s,%s);'''
-        cursor.execute(sql,(title,description,link,date,time))
+        id = data.get('userType')
+        if id=="Premium Users":
+            id = 2
+        if id=="Lite Users":
+            id = 1
+        sql = '''UPDATE webinars 
+            SET title = %s, description = %s, link = %s, date = %s, time = %s 
+            WHERE ID = %s;'''
+        cursor.execute(sql,(title,description,link,date,time,id))
         conn.commit()
         return {"status":1,'message':'Webinar link update'}
 if __name__=='__main__':
