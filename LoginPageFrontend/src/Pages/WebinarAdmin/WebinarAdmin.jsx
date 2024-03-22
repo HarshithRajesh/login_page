@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react'
 import "./WebinarAdmin.css"
-import { useNavigate } from 'react-router-dom'
-export const Detailed = () => { }
+import { json, useNavigate } from 'react-router-dom'
+
 const WebinarAdmin = () => {
   const navigate = useNavigate();
- 
+  const [userData, setUserdata] = useState([]);
   useEffect(() => {
     window.scroll(0, 0);
   }, [])
@@ -15,25 +15,37 @@ const WebinarAdmin = () => {
   }, [])
   const Detailed = useRef();
 
-  const handleClick = () => {
-    console.log(Detailed.current.value, "initial value")
-    localStorage.setItem("inputValue", Detailed.current.value)
-  }
-  const [userData, setUserdata] = useState([]);
-  useEffect(() => {
-    const getUserdata = async () => {
-      const reqData = await fetch("http://192.168.199.115:5000/");
-      const resData = await reqData.json();
-      setUserdata(resData);
-      console.log(resData);
+  const handleClick = async () => {
+    // Make a request here if needed
+    // ...
+    // After your request, you can update the userData
+  };
+
+  // Define the fetchData function
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/Admin');
+
+      // Check if the response is ok
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setUserdata(data);
+    } catch (error) {
+      console.error('Error fetching data: ', error);
     }
-    getUserdata();
+  };
+  // Call fetchData function when the component mounts
+  useEffect(() => {
+    fetchData();  
+    console.log(userData.count);
   }, []);
 
-  console.log(localStorage.getItem("inputValue"))
-  const parsedUserData = JSON.parse(userData);
   return (
-    <div><textarea ref={Detailed} />
+    <div>
+      <textarea ref={Detailed} />
       <button onClick={handleClick}>Add</button>
       <br /><br /><br />
       <div className="container">
@@ -50,7 +62,7 @@ const WebinarAdmin = () => {
                 </tr>
               </thead>
               <tbody>
-              {parsedUserData && parsedUserData.map(user =>  (
+                {userData.map((userData, index) => (
                   <tr key={index}>
                     <td>{index + 1} </td>
                     <td>{userData.username} </td>
@@ -65,8 +77,7 @@ const WebinarAdmin = () => {
         </div>
       </div>
     </div>
-
-  )
+  );
 }
 
-export default WebinarAdmin
+export default WebinarAdmin;
