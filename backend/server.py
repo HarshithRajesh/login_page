@@ -52,6 +52,7 @@ def register():
             return {"status":1,'message':'User Registerd'}
     
 
+
 @app.route('/Login',methods=['GET','POST'])
 def login():
     conn =get_db_connection()
@@ -81,7 +82,7 @@ def login():
 @app.route("/Admin",methods=['GET','POST'])
 def admin():
     conn =get_db_connection()
-    if request.method=='POST':
+    if request.method=='GET':
         cursor = conn.cursor()
         query = f"SELECT id,name,email,phonenumber FROM users ;"
         cursor.execute(query)
@@ -94,7 +95,22 @@ def admin():
         # return json.dumps(users_json)
         return {"count":count,"users":users_json}
 
-
-
+@app.route("/Webinar/Admin",methods=['GET','POST'])
+def webniar():
+    conn =get_db_connection()
+    if request.method=='POST':
+        cursor = conn.cursor()
+        data = request.get_json()
+        title = data.get('title')
+        description = data.get('description')
+        link = data.get('link')
+        date = data.get('date')
+        time = data.get('time')
+        sql = '''INSERT INTO webinars
+                (title,description,link,date,time)
+                VALUES (%s,%s,%s,%s,%s);'''
+        cursor.execute(sql,(title,description,link,date,time))
+        conn.commit()
+        return {"status":1,'message':'Webinar link update'}
 if __name__=='__main__':
     app.run(host='0.0.0.0',debug=True)
