@@ -1,0 +1,81 @@
+.form_control {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+}
+
+.form_control input {
+    height: 40px;
+    padding: 0 8px;
+}
+
+.form_control textarea {
+    padding: 8px;
+}
+
+.form_control label {
+    font-size: 14px;
+    position: absolute;
+    font-family: "Alegreya",sans-serif;
+    top: -12px;
+    left: 10px;
+    background-color: white;
+    padding: 0 10px;
+}
+
+.contact_form {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .contact_form form {
+    display: flex;
+    gap: 15px;
+    padding-bottom: 2px;
+    flex-direction: column;
+  }
+.form_control_check {
+    display: flex;
+    gap: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.center_paper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+  }
+  .grid_content {
+    padding: 2rem;
+  }
+
+  .Arranging {
+    display: flex;
+    align-items:center;
+    flex-direction: row;
+    padding-right: 10px;
+  }
+
+  .Head{
+    font-family: cursive;
+  }
+  .Image{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .Close{
+    float: right;
+      }
+      .Close:hover{
+        -webkit-transform: rotate(270deg) skewY(2deg);
+        -moz-transform: rotate(270deg) skewY(2deg);
+        -ms-transform: rotate(270deg) skewY(2deg);
+      }
