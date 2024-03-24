@@ -28,7 +28,7 @@ function SignUp() {
   const passwordRef = useRef();
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://0.0.0.0:5000/Form/', {
+    fetch('http://0.0.0.0:5000/Register/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -42,6 +42,7 @@ function SignUp() {
     })
       .then(response => {
         if (!response.ok) {
+          console.log("Hello")
           throw new Error('HTTP error ' + response.status);
         }
         return response.json();
@@ -53,7 +54,7 @@ function SignUp() {
       })
       .catch(error => {
         // Handle any errors
-        console.error(error);
+        console.error(error,'Hello chinmay');
         
       });
       if (Number(localStorage.getItem('password')) === 1) {
