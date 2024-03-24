@@ -1,6 +1,4 @@
 from flask import Flask,redirect,request,jsonify
-from flask_wtf import FlaskForm
-import psycopg2
 from flask_cors import CORS
 import os
 import psycopg2
