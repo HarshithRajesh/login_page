@@ -18,7 +18,7 @@ const Login = () => {
   const passwordRef = useRef();
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://0.0.0.0:5000/Login', {
+    fetch('http://139.59.44.85:5000/Login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
