@@ -19,6 +19,15 @@ def get_db_connection():
         password=database_password
     )
     return conn
+# def get_db_connection():
+#     conn = psycopg2.connect(
+#         host='localhost',
+#         port=5432,
+#         database="postgres",
+#         user="postgres",
+#         password="babe"
+#     )
+#     return conn
 
 app = Flask(__name__)
 app.config['SECRET_KEY']=secret_key
