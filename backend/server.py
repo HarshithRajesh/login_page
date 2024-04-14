@@ -8,24 +8,16 @@ import json
 load_dotenv()
 database_password = os.getenv('DATABASE_PASSWORD')
 secret_key = os.getenv("SECRET_KEY")
+
 def get_db_connection():
     conn = psycopg2.connect(
-        host='aws-0-ap-south-1.pooler.supabase.com',
+        host='localhost',
         port=5432,
-        database="postgres",
-        user="postgres.uodmrwwhsbtuhqixczez",
-        password=database_password
+        database="",
+        user="",
+        password=""
     )
     return conn
-# def get_db_connection():
-#     conn = psycopg2.connect(
-#         host='localhost',
-#         port=5432,
-#         database="postgres",
-#         user="postgres",
-#         password="babe"
-#     )
-#     return conn
 
 app = Flask(__name__)
 app.config['SECRET_KEY']=secret_key
